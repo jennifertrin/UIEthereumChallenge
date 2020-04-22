@@ -9,8 +9,8 @@ pragma solidity ^0.6.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol" as ERC20Mintable; 
 
 contract TimeToken is ERC20Mintable {
-    uint256 starttime;
-    uint256 endtime;
+    uint256 private starttime;
+    uint256 private endtime;
     
     ///@notice function that allow token transfer only between a start and end times
     function requiretime(uint256 _starttime, uint256 _endtime) public view {
