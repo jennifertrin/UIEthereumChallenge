@@ -1,7 +1,12 @@
-pragma solidity ^0.5.0; 
+/// @title A smart contract that extends ERC20Mintable contract from Open Zeppelin and allows token transfer only between specific start and end times
+/// @author Jennifer Tran
+/// @notice You can use this contract for only the most basic simulation
+/// @dev All function calls are currently implemented without side effects
+
+pragma solidity ^0.6.0; 
 
 //imports
-import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol"; //ERC20Mintable from Open Zeppelin library
+import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol" as ERC20Mintable; //ERC20Mintable from Open Zeppelin library
 
 contract TimeToken is ERC20Mintable {
     uint256 starttime;
