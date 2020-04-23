@@ -41,8 +41,8 @@ contract('TimeToken', async () => {
     });
     //test that confirms an error when attempt to donate outside of start and end times
     it('Confirms that cannot proceed if current time is not within the start and end times', async() => {
-        const time = await TimeToken.new(_startTime + 4000, _endTime - 4000);      
-        const result = await time.requiretime();
+        const time = await TimeToken.new();      
+        const result = await time.requiretime(_startTime + 4000, _endTime - 4000, firstAccount, amount);
         assert.equal(result, "The donation window is currently not open");
     });
 });
