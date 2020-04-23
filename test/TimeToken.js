@@ -19,7 +19,7 @@ let firstAccount = accounts[0]; //first test account from Ganache
 3. When a donation is made, confirm that you can view the amount donated from the address.
 4. When the current time is not within the start and end times, a donation cannot be made and an error will be displayed. No tokens will be sent to the address that attempted to donate. 
 */
-contract('DonationTests', async () => {
+contract('TimeToken', async () => {
     beforeEach(async () => { //use beforeEach to set up calls that need to happen before each test
         let c = await Contribution.new(t.address,ethToTokenRate);
     });
