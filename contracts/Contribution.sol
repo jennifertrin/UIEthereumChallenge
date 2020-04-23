@@ -5,7 +5,7 @@ pragma solidity ^0.6.0;
 
 ///@dev imports
 import "./TimeToken.sol" as TimeToken; ///@dev TimeToken Contract
-//import "@openzeppelin/contracts/math/SafeMath.sol" as SafeMath;  ///@dev SafeMath Library from OpenZeppelin
+import "@openzeppelin/contracts/math/SafeMath.sol" as SafeMath;  ///@dev SafeMath Library from OpenZeppelin
 
 contract Contribution is TimeToken {
 
