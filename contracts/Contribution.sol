@@ -1,11 +1,11 @@
 /// @title Contribution Smart Contract
 /// @author Jennifer Tran
 /// @notice A smart contract that allows users to donate ETH to and provides tokens in return
-pragma solidity ^0.6.0; 
+pragma solidity ^0.6.0;
 
 ///@dev imports
 import "./TimeToken.sol" as TimeToken; ///@dev TimeToken Contract
-import "@openzeppelin/contracts/math/SafeMath.sol" as SafeMath;  ///@dev SafeMath Library from OpenZeppelin
+//import "@openzeppelin/contracts/math/SafeMath.sol" as SafeMath;  ///@dev SafeMath Library from OpenZeppelin
 
 contract Contribution is TimeToken {
 
@@ -51,7 +51,6 @@ contract Contribution is TimeToken {
     constructor (address _tokenReference) public {
         contractReference = Token(_tokenReference);
         ethToTokenRate = _ethToTokenRate;
-
     }
 
     ///@notice fallback function to send Ether from address to this smart contract and then automatically provides token from smart contract to donor
