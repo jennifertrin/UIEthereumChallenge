@@ -1,7 +1,7 @@
 /// @title Contribution Smart Contract
 /// @author Jennifer Tran
 /// @notice A smart contract that allows users to donate ETH to and provides tokens in return
-pragma solidity ^0.6.0;
+pragma solidity ^0.5.0;
 
 ///@dev imports
 import "./TimeToken.sol" as TimeToken; ///@dev TimeToken Contract
@@ -43,8 +43,8 @@ contract Contribution is TimeToken {
     ///@dev token contract reference
     Token private contractReference;
 
-`   ///@dev stores rate to convert ETH to token value
-    uint ethToTokenRate;
+   ///@dev stores rate to convert ETH to token value
+    uint private ethToTokenRate;
 
     constructor (address _tokenReference) public {
         contractReference = Token(_tokenReference);
@@ -72,7 +72,7 @@ contract Contribution is TimeToken {
     }
 
     ///@notice public view function that returns the donation amount of the address
-    ///@param address is the address that you would like to check
+    ///@param _address is the address that you would like to check
     ///@return returns the amount that the address has donated to this contract
     function checkDonation(address _address) public view returns(uint) {
         totalDonation = donors[_address];

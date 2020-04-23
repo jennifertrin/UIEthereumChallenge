@@ -19,7 +19,7 @@ let firstAccount = accounts[0]; //first test account from Ganache
 3. When a donation is made, confirm that you can view the amount donated from the address.
 4. When the current time is not within the start and end times, a donation cannot be made and an error will be displayed. No tokens will be sent to the address that attempted to donate. 
 */
-contract('DonationTests', async () => {
+contract('TimeToken', async () => {
     beforeEach(async () => { //use beforeEach to set up calls that need to happen before each test
         let c = await Contribution.new(t.address,ethToTokenRate);
     });
@@ -41,8 +41,8 @@ contract('DonationTests', async () => {
     });
     //test that confirms an error when attempt to donate outside of start and end times
     it('Confirms that cannot proceed if current time is not within the start and end times', async() => {
-        const time = await TimeToken.new(_startTime + 4000, _endTime - 4000);      
-        const result = await time.requiretime();
+        const time = await TimeToken.new();      
+        const result = await time.requiretime(_startTime + 4000, _endTime - 4000, firstAccount, amount);
         assert.equal(result, "The donation window is currently not open");
     });
 });
