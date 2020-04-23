@@ -11,8 +11,6 @@ contract Contribution is TimeToken {
 
     using SafeMath for uint256; ///@dev use SafeMath library
 
-    address owner;
-
     ///@dev events
     ///@dev event to track new donation
     event NewDonation (

@@ -43,6 +43,6 @@ contract('DonationTests', async () => {
     it('Confirms that cannot proceed if current time is not within the start and end times', async() => {
         const time = await TimeToken.new(_startTime + 4000, _endTime - 4000);      
         const result = await time.requiretime();
-        assert.equal(result, false);
+        assert.equal(result, "The donation window is currently not open");
     });
 });

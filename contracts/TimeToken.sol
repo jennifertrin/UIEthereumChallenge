@@ -12,13 +12,20 @@ contract TimeToken is ERC20Mintable {
     uint256 private starttime;
     uint256 private endtime;
     
-    ///@notice function that allow token transfer only between a start and end times
-    function requiretime(uint256 _starttime, uint256 _endtime) public view {
-        uint256 _currenttime = now; //current time
-        require(_currenttime >= _starttime); ///@dev require current time is after or equal to start time
-        require(_currenttime <= _endtime); ///@dev require current time is before or equal to end time
-        _starttime = starttime;
-        _endtime = endtime;
+    ///@notice function that allows token transfer only between a start and end times
+    ///@param _starttime is the start time of the donation window
+    ///@param _sendtime is the end time of the donation window
+    ///@param address is the address that the token is minted to
+    ///@param value is the amount of the token minted
+    ///@return returns the conversion from ETH to token, amount in the token
+    function requiretime(uint256 _starttime, uint256 _endtime, address _account, uint value) public view {
+        uint256 _currenttime = now; ///@dev current time
+        if (_currenttime >= _starttime && _currenttime <= _starttime) {
+            mint(_account, value); ///@dev using the mint function from ERCMintable Contract
+            _starttime = starttime;
+            _endtime = endtime;
+        }
+        revert("The donation window is currently not open");
     }
 }
 
