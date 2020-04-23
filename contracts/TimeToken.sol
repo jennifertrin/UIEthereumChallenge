@@ -17,7 +17,6 @@ contract TimeToken is ERC20Mintable {
         uint256 _currenttime = now; //current time
         require(_currenttime >= _starttime); ///@dev require current time is after or equal to start time
         require(_currenttime <= _endtime); ///@dev require current time is before or equal to end time
-
         _starttime = starttime;
         _endtime = endtime;
     }
