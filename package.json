@@ -1,0 +1,29 @@
+{
+  "name": "uiethereumchallenge",
+  "version": "1.0.0",
+  "description": "The Upstate Interactive Ethereum Challenge is a code project intended to demonstrate skills in Solidity, Truffle, and OpenZeppelin. The project",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jennifertrin/UIEthereumChallenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jennifertrin/UIEthereumChallenge/issues"
+  },
+  "homepage": "https://github.com/jennifertrin/UIEthereumChallenge#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.0.2",
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.6"
+  }
+}

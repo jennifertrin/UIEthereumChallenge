@@ -1,37 +1,43 @@
-/// @title TimeToken Smart Contract
-/// @author Jennifer Tran
-/// @notice A smart contract that extends ERC20Mintable contract from Open Zeppelin and allows token transfer only between specific start and end times
-
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 ///@dev imports
 ///@notice ERC20Mintable from Open Zeppelin library
-import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol" as ERC20Mintable;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract TimeToken is ERC20Mintable {
-    uint256 private startTime;
-    uint256 private endTime;
+contract TimeToken is ERC20, AccessControl {
+    uint256 public startTime;
+    uint256 public endTime;
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    constructor(uint _startTime, uint _endTime) public{
+    constructor(uint256 _startTime, uint256 _endTime)
+        ERC20('TimeToken', 'TT')
+        public
+    {
+        require(_startTime > now && _startTime < _endTime,
+        'StartTime must be greater than now'
+        );
       _startTime = _startTime;
       _endTime = _endTime;
-      address;
-  }
+
+      _setupRole(MINTER_ROLE, msg.sender);
+      mint(address(this), 1000);
+    }
+
+    function mint(address to, uint256 amount) public {
+        // Check that the calling account has the minter role
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        _mint(to, amount);
+    }
 
     ///@notice function that allow  token transfer only between a start and end times
-    ///@param _startTime is the start time of the donation window
-    ///@param _endTime is the end time of the donation window
-    ///@param _account is the address that the token is minted to
-    ///@param value is the amount of the token minted
-    ///@return returns the conversion from ETH to token, amount in the token
-    function requiretime(uint256 _startTime, uint256 _endTime, address _account, uint value) public {
-        uint256 _currenttime = now; ///@dev current time
-        if (_currenttime >= _startTime && _currenttime <= _endTime) {
-            mint(_account, value); ///@dev using the mint function from ERCMintable COntract
-            _startTime = startTime;
-            _endTime = endTime;
-        }
-        revert("The donation window is currently not open");
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        uint256 currentTime = now;
+        require(currentTime >= startTime && currentTime <= endTime,
+            'The donation window is currently not open'
+        );
+        require(super.transfer(recipient, amount));
     }
+
 }
 
